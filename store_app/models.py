@@ -18,10 +18,10 @@ class Item(models.Model):
 
 
 class Sale(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    client_id = models.ForeignKey(Client, on_delete=models.CASCADE)
+    item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return f"{self.client.name} bought {self.item.name}"
+        return f"{self.client_id} bought {self.item_id}"
     

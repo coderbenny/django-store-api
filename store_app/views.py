@@ -2,6 +2,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from django.db import models
+
 from .models import Client, Item, Sale
 from .serializers import ClientSerializer, ItemSerializer, SaleSerializer
 
@@ -22,6 +24,27 @@ def get_clients(request):
 def get_items(request):
     items = Item.objects.all()
     serializer = ItemSerializer(items, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+# Delete Items
+@api_view(['DELETE'])
+def delete_item(request, item_id):
+    try:
+        item = Item.objects.get(id=item_id)
+        item.delete()
+        return Response({'message':'Item deleted succesfully'}, status=status.HTTP_204_NO_CONTENT)
+    except item.DoesNotExist:
+        return Response({'error':'Item not found'}, status=status.HTTP_404_NOT_FOUND)
+
+# View Item By ID
+@api_view(['GET'])
+def view_item(request, item_id):
+    try:
+        item = Item.objects.get(id=item_id)
+    except Item.DoesNotExist:
+        return Response({"error": "Item not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = ItemSerializer(item)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 # Creating order Route 

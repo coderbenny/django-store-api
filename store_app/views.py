@@ -72,7 +72,7 @@ def create_order(request):
         return Response({"error": "Item not found"}, status=status.HTTP_404_NOT_FOUND)
 
     # Create sale
-    sale = Sale.objects.create(client=client, item=item)
+    sale = Sale.objects.create(client_id=client, item_id=item)
 
     return Response({"message": "Order created successfully", "sale": SaleSerializer(sale).data}, status=status.HTTP_201_CREATED)
 

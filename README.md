@@ -2,6 +2,10 @@
 
 Welcome to the Fashion Store Django Backend API! This API provides endpoints to manage clients, sales, inventory, and revenue for a fashion store.
 
+## Author
+
+Benny Hinn
+
 ## Endpoints
 
 ### Get All Clients

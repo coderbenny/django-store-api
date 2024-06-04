@@ -80,7 +80,7 @@ def create_order(request):
 # Total Revenue Route
 @api_view(['GET'])
 def get_total_revenue(request):
-    total_revenue = Sale.objects.aggregate(total_revenue=models.Sum('item__price'))['total_revenue'] or 0
+    total_revenue = Sale.objects.aggregate(total_revenue=models.Sum('item_id__price'))['total_revenue'] or 0
     return Response({"total_revenue": total_revenue}, status=status.HTTP_200_OK)
 
 # Total Sales Route

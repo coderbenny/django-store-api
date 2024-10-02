@@ -1,0 +1,13 @@
+name: Keep Render Instance Alive
+
+on:
+  schedule:
+    - cron: "*/15 * * * *" # Runs every 10 minutes
+
+jobs:
+  keep_alive_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send request to keep the server alive
+        run: curl -X GET https://django-store-api.onrender.com/
